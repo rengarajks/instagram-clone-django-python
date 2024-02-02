@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 
 from posts.models import Tag,Stream,Post,Follow
 
@@ -57,3 +57,15 @@ def newPost(request):
     }
 
     return render(request,'newPost.html',context)
+
+
+
+
+
+def postDetail(request,post_id):
+    post=get_object_or_404(Post,id=post_id)
+    context={
+        'post':post
+    }
+
+    return render(request,'postdetail.html',context)

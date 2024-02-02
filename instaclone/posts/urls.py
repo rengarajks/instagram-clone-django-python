@@ -3,5 +3,8 @@ from . import views
 
 urlpatterns=[
     path('',views.index,name='index'),
-    path('newPost/',views.newPost)
+    path('<uuid:post_id>/',views.postDetail,name='post-detail'),
+
+    path('newPost/',views.newPost),
+    
 ]
