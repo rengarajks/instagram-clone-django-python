@@ -28,6 +28,7 @@ urlpatterns = [
     path('<username>/',UserProfile,name="profile"),
     path('<username>/saved',UserProfile,name="saved"),
     path('<username>/follow/<option>/',follow,name="follow"),
+    path('user/',include('userauths.urls'),name="user")
 
 ]
 if settings.DEBUG:

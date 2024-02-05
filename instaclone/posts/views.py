@@ -5,6 +5,8 @@ from django.urls import reverse
 
 from posts.models import Tag,Stream,Post,Follow,Likes
 from userauths.models import Profile
+from comment.models import Comment
+from comment.forms import NewCommentForm
 
 from .forms import newPostForm
 # Create your views here.
@@ -67,9 +69,24 @@ def newPost(request):
 
 
 def postDetail(request,post_id):
+    user=request.user
     post=get_object_or_404(Post,id=post_id)
+    comments = Comment.objects.filter(post=post).order_by('-date')
+
+    if request.method == "POST":
+        form = NewCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = user
+            comment.save()
+            return HttpResponseRedirect(reverse('post-detail', args=[post.id]))
+    else:
+        form = NewCommentForm()
     context={
-        'post':post
+        'post':post,
+        'form': form,
+        'comments': comments,
     }
 
     return render(request,'postdetail.html',context)

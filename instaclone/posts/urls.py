@@ -7,6 +7,8 @@ urlpatterns=[
     path('<uuid:post_id>/like',views.like,name='post-like'),
      path('<uuid:post_id>/fav/',views.favourite,name='post-fav'),
 
+
     path('newPost/',views.newPost),
+    
     
 ]
