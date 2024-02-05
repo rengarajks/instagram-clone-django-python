@@ -4,6 +4,7 @@ from django.urls import reverse
 
 
 from posts.models import Tag,Stream,Post,Follow,Likes
+from userauths.models import Profile
 
 from .forms import newPostForm
 # Create your views here.
@@ -92,4 +93,22 @@ def like(request, post_id):
     post.likes = current_likes
     post.save()
     # return HttpResponseRedirect(reverse('post-details', args=[post_id]))
+    return HttpResponseRedirect(reverse('post-detail', args=[post_id]))
+
+
+
+
+
+def favourite(request, post_id):
+    user = request.user
+    post = Post.objects.get(id=post_id)
+    profile=Profile.objects.get(user=user)
+
+
+    if profile.favourite.filter(id=post_id).exists():
+        profile.favourite.remove(post)
+    else:
+        profile.favourite.add(post)
+        
+   
     return HttpResponseRedirect(reverse('post-detail', args=[post_id]))
