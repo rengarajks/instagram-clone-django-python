@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from userauths.views import UserProfile,follow
+from directs.views import inbox,Directs
 
 
 urlpatterns = [
@@ -28,7 +29,11 @@ urlpatterns = [
     path('<username>/',UserProfile,name="profile"),
     path('<username>/saved',UserProfile,name="saved"),
     path('<username>/follow/<option>/',follow,name="follow"),
-    path('user/',include('userauths.urls'),name="user")
+    path('user/',include('userauths.urls'),name="user"),
+    path('message/',include('directs.urls'),name="message"),
+
+    #message
+    
 
 ]
 if settings.DEBUG:
