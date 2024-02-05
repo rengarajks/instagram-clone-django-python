@@ -52,17 +52,17 @@
                         
                         {% endif %}
                         <br><br>
-                        {% if request.user.is_authenticated and request.user != profile.user %}
+                        {% if profile.user != request.user %}
                             {% if follow_status == True %}
-                                <a href="" class="btn profile-edit-btn" style="color: red;">Unfollow</a> <br><br>
+                                <a href="{%url 'follow' profile.user 0 %}" class="btn profile-edit-btn" style="color: red;">Unfollow</a> <br><br>
                             {% else %}
-                                <a href="" class="btn profile-edit-btn" style="color: green;">Follow</a> <br><br>
+                                <a href="{%url 'follow' profile.user 1 %}" class="btn profile-edit-btn" style="color: green;">Follow</a> <br><br>
                             {% endif %}
                         {% endif %}
 
-                        {% if request.user.is_authenticated and request.user != profile.user %}
+                        
                                 <a href="" class="btn profile-edit-btn">Message</a> <br><br>
-                        {% endif %}
+                        
                         <br>
 
                     
@@ -106,9 +106,9 @@
                 <div class="profile-stats">
 
                     <ul>
-                        <li><span class="profile-stat-count">{{posts_count}}</span>200 posts</li>
-                        <li><span class="profile-stat-count">{{followers_count}}</span>20k followers</li>
-                        <li><span class="profile-stat-count">{{following_count}}</span>212 following</li>
+                        <li><span class="profile-stat-count">{{posts_count}}</span> posts</li>
+                        <li><span class="profile-stat-count">{{followers_count}}</span> followers</li>
+                        <li><span class="profile-stat-count">{{following_count}}</span> following</li>
                     </ul>
                     <br>
                     
